@@ -101,18 +101,18 @@ public class FlooringMasteryServiceLayerImpl implements FlooringMasteryServiceLa
         return productDao.getAllProducts();
     }
 
-    public void checkProductType(String productTypeInput) throws FlooringMasteryServiceException, FileNotFoundException {
+    public void checkProductType(String productTypeParam) throws FlooringMasteryServiceException, FileNotFoundException {
         List<Product> productList = productDao.getAllProducts();
         String productType = null;
 
         for (Product product : productList) {
-            if (product.getProductType().equalsIgnoreCase(productTypeInput)) {
+            if (product.getProductType().equalsIgnoreCase(productTypeParam)) {
                 productType = product.getProductType();
             }
         }
         if (productType == null) {
             throw new FlooringMasteryServiceException(
-                    "ERROR: " + productTypeInput + " is currently not in the product list.");
+                    "ERROR: " + productTypeParam + " is currently not in the product list.");
         }
     }
 
@@ -217,11 +217,11 @@ public class FlooringMasteryServiceLayerImpl implements FlooringMasteryServiceLa
         return order;
     }
 
-    public Order updateOrderState(String state, Order orderToEdit) {
+    public Order updateOrderState(String state, Order order) {
         if (state != null) {
-            orderToEdit.setStateAbbreviation(state);
+            order.setStateAbbreviation(state);
         }
-        return orderToEdit;
+        return order;
     }
 
     public Order updateOrderProductType(String productType, Order order) {
@@ -238,7 +238,7 @@ public class FlooringMasteryServiceLayerImpl implements FlooringMasteryServiceLa
         return order;
     }
 
-    public Order recalculateOrder(Order order) throws FileNotFoundException {
+    public Order recalculateOrder(Order order) {
         BigDecimal updatedTaxRate = null;
         BigDecimal updatedCostPerSquareFoot = null;
         BigDecimal updatedLaborCostPerSquareFoot = null;

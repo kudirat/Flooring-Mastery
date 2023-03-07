@@ -26,6 +26,8 @@ public class App {
 //        // Instantiate the Controller and wire the Service Layer into it
 //        FlooringMasteryController controller = new FlooringMasteryController(myView, myService);
 //        controller.run();  // Kick off the Controller
+
+         //implementing Spring DI!
          ApplicationContext appContext
                  = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
 

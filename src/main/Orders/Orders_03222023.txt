@@ -1,0 +1,2 @@
+OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborCostPerSquareFoot,MaterialCost,LaborCost,Tax,Total
+1,La,CA,271.8750,Carpet,250,562.50,525.00,562.50,525.00,271.8750,1359.3750

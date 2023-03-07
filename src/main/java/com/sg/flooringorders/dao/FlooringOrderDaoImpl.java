@@ -58,20 +58,6 @@ public class FlooringOrderDaoImpl implements FlooringOrderDao{
         return orderNums;
     }
 
-    public List<Order> getAllOrders() throws FileNotFoundException {
-        String [] allOrderFiles = listAllOrderFiles();
-        List<Order> allOrders = new ArrayList<Order>();
-
-        for (String orderFile : allOrderFiles) {
-            List<Order> ordersForADate = getOrdersForDate(orderFile);
-            ordersForADate.forEach(order -> {
-                allOrders.add(order);
-            });
-        }
-        orders.clear();
-        return allOrders;
-    }
-
     public List<Integer> getAllOrderNums() throws FileNotFoundException {
         String [] allOrderFiles = listAllOrderFiles();
         List<Integer> allOrderNums = new ArrayList<Integer>();

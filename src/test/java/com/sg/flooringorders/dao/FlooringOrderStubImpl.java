@@ -79,12 +79,6 @@ public class FlooringOrderStubImpl implements FlooringOrderDao{
     }
 
     @Override
-    public List<Order> getAllOrders() throws FileNotFoundException {
-        System.out.println("Not Supported yet!");
-        return null;
-    }
-
-    @Override
     public List<Integer> getAllOrderNums() throws FileNotFoundException {
         System.out.println("Not Supported yet!");
         return null;

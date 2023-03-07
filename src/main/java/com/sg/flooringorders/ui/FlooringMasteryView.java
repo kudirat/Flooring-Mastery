@@ -102,7 +102,6 @@ public class FlooringMasteryView {
     }
 
     public String displayNewOrderSummary(LocalDate orderDateInput, int orderNumber,String customerNameInput, String stateAbbreviationInput, String productTypeInput, BigDecimal areaInput, BigDecimal materialCost, BigDecimal laborCost, BigDecimal tax, BigDecimal total){
-        io.print("========= Order Summary =========");
         io.print("Order date:         " + orderDateInput);
         io.print("Customer Name:      " + customerNameInput);
         io.print("State Abbreviation: " + stateAbbreviationInput);
@@ -117,7 +116,6 @@ public class FlooringMasteryView {
     }
 
     public void displayEditedOrderSummary(LocalDate orderDateInput,Order editedOrder) {
-        io.print("=== Order Summary ===");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy");
         io.print("Order date:          " + orderDateInput.format(formatter));
         io.print("Customer Name:       " + editedOrder.getCustomerName());
@@ -131,7 +129,6 @@ public class FlooringMasteryView {
     }
 
     public void displayOrderInformation(LocalDate orderDateInput, Order orderToRemove) {
-        io.print("=== Order Summary ===");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY-MM-DD");
         io.print("Order date:         " + orderDateInput.format(formatter));
         io.print("Customer Name:      " + orderToRemove.getCustomerName());
@@ -185,14 +182,6 @@ public class FlooringMasteryView {
         return io.readString("Do you want to remove this order? (Y/N)");
     }
 
-    public void displayEditSuccessBanner(Order editedOrder){
-        if (editedOrder == null) {
-            io.readString("Please hit enter to continue.");
-        } else {
-            io.print("=== Order Edited Successfully ===");
-        }
-    }
-
     public void displayErrorMessage(String errorMsg) {
         io.print("=== ERROR ERROR ===");
         io.print(errorMsg);
@@ -200,14 +189,6 @@ public class FlooringMasteryView {
 
     public void displayExitBanner() {
         io.print("Good bye!!!");
-    }
-
-    public void displayCreateSuccessBanner(Order currOrder){
-        if (currOrder == null){
-            io.readString("Please hit enter to continue.");
-        } else {
-            io.print("=== Order Created Successfully ===");
-        }
     }
 
     public void displayRemoveOrderBanner() {

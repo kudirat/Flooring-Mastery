@@ -137,6 +137,7 @@ public class FlooringMasteryController {
             LocalDate orderDateInput = LocalDate.parse(orderDateStr);
 
             int orderNumber = view.getOrderNumberEditOrder();
+
             try {
                 String orderFileName = service.createOrderFileName(orderDateInput);
                 service.checkOrderFileExists(orderFileName);
@@ -163,9 +164,9 @@ public class FlooringMasteryController {
                 }
                 updatedOrder = service.updateOrderProductType(newProductType, orderToEdit);
 
-                String updatedAreaString = view.displayAndGetEditArea(orderToEdit);
-                BigDecimal updatedArea = service.checkEditBigDecimal(updatedAreaString);
-                if (updatedArea!=null) {
+                String newAreaStr = view.displayAndGetEditArea(orderToEdit);
+                BigDecimal updatedArea = service.checkEditBigDecimal(newAreaStr);
+                if (updatedArea != null) {
                     service.checkArea(updatedArea);
                 }
                 updatedOrder = service.updateOrderArea(updatedArea, orderToEdit);
@@ -174,9 +175,9 @@ public class FlooringMasteryController {
 
                 view.displayEditedOrderSummary(orderDateInput,orderToEdit);
 
-                String toBeEdited = view.getSaveConfirmation();
+                String userConfirm = view.getSaveConfirmation();
 
-                Order editedOrder = service.editOrder(toBeEdited,orderFileName,updatedOrder);
+                Order editedOrder = service.editOrder(userConfirm,orderFileName,updatedOrder);
 
                 hasErrors = false;
             } catch (FlooringMasteryServiceException | IOException e) {

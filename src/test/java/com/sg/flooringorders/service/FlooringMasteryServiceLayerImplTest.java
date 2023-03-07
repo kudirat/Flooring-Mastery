@@ -5,6 +5,7 @@ import com.sg.flooringorders.service.FlooringMasteryServiceLayer;
 import com.sg.flooringorders.service.FlooringMasteryServiceLayerImpl;
 import org.junit.jupiter.api.*;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -14,7 +15,6 @@ public class FlooringMasteryServiceLayerImplTest {
 
     FlooringMasteryServiceLayer service;
     FlooringOrderDao orderDao = new FlooringOrderDaoImpl();
-
 
     public FlooringMasteryServiceLayerImplTest(){
         //these stubs currently do nothing right now
@@ -91,6 +91,28 @@ public class FlooringMasteryServiceLayerImplTest {
         } catch (FlooringMasteryServiceException e) {
             fail("Exception should not have been thrown!");
         }
+    }
+
+    /**
+     * Fails for now. Will re-visit once I flesh out Product File Dao Stub
+     */
+    @Test
+    public void checkProductTypeTest(){
+        String productType = new String("Hair");
+
+        Exception exception = assertThrows(IOException.class, () -> {
+            service.checkProductType(productType);
+        });
+
+        String expectedMessage = "ERROR: " + productType + " is currently not in the product list.";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    public void createNewOrder(){
+
     }
 
 

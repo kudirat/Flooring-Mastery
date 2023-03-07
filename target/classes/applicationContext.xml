@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+                http://www.springframework.org/schema/beans
+                http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Bean definitions go here -->
+    <bean id = "userIO" class = "com.sg.flooringorders.ui.UserIOConsoleImpl"/>
+    <bean id = "view" class = "com.sg.flooringorders.ui.FlooringMasteryView">
+        <constructor-arg ref = "userIO"/>
+    </bean>
+    <bean id = "FlooringOrderDao"
+          class = "com.sg.flooringorders.dao.FlooringOrderDaoImpl"/>
+    <bean id = "ProductFileDao"
+          class = "com.sg.flooringorders.dao.ProductFileDaoImpl"/>
+    <bean id = "TaxFileDao"
+          class = "com.sg.flooringorders.dao.TaxFileDaoImpl"/>
+    <bean id = "serviceLayer"
+          class = "com.sg.flooringorders.service.FlooringMasteryServiceLayerImpl">
+        <constructor-arg ref = "FlooringOrderDao"/>
+        <constructor-arg ref = "ProductFileDao"/>
+        <constructor-arg ref = "TaxFileDao"/>
+    </bean>
+    <bean id = "controller"
+          class = "com.sg.flooringorders.controller.FlooringMasteryController">
+        <constructor-arg ref = "view"/>
+        <constructor-arg ref = "serviceLayer"/>
+    </bean>
+
+</beans>
