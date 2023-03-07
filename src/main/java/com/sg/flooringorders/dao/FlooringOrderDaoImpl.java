@@ -192,30 +192,17 @@ public class FlooringOrderDaoImpl implements FlooringOrderDao{
         return fileOrder;
     }
 
-
-    private String getDateFromFileName(String fileName) {
-
-        String date = fileName.substring(0, 2) + "/" + fileName.substring(2, 4) + "/" + fileName.substring(4);
-
-//        //File name pattern "Order_MMDDYY.txt"
-//        String [] fileNameTokens = fileName.split("_");
-//
-//        String [] dateTokens = fileNameTokens[1].split("\\.");
-//
-//        String date = dateTokens[0];
-//
-//        String mm = date.substring(0, 2);
-//        String dd = date.substring(2, 4);
-//        String yyyy = date.substring(4, 8);
-//        //req format is MM-DD-YYYY
-//        return mm+"-"+dd+"-"+yyyy;
-        return date;
-    }
+    //Helper Methods
 
     public String generateOrderNum(){
         int capacity = orders.size();
         capacity++;
         return Integer.toString(capacity);
+    }
+
+    private String getDateFromFileName(String fileName) {
+        String date = fileName.substring(0, 2) + "/" + fileName.substring(2, 4) + "/" + fileName.substring(4);
+        return date;
     }
 
     //not needed :(
