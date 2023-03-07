@@ -74,8 +74,9 @@ public class FlooringMasteryServiceLayerImpl implements FlooringMasteryServiceLa
         return orderDate;
     }
 
-    public void validateCustomerName(String customerNameInput) throws FlooringMasteryServiceException {
-        if (customerNameInput.length() <= 0 && (customerNameInput.matches("[A-Za-z0-9,. ]+"))) {
+    public void validateCustomerName(String customerName) throws FlooringMasteryServiceException {
+        if (!(customerName.length() > 0) && !(customerName.matches("[A-Za-z0-9,. ]+")
+        && (customerName.isEmpty()))) {
             throw new FlooringMasteryServiceException(
                     "ERROR: You did not enter a valid Customer Name!");
         }

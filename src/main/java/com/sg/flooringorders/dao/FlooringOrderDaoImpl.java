@@ -4,9 +4,6 @@ import com.sg.flooringorders.dto.Order;
 
 import java.io.*;
 import java.math.BigDecimal;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.*;
 
 public class FlooringOrderDaoImpl implements FlooringOrderDao{
@@ -25,7 +22,6 @@ public class FlooringOrderDaoImpl implements FlooringOrderDao{
     public Order addOrderToNewFile(String fileName, int orderNumber, Order order) throws IOException {
         Order newOrder = orders.put(orderNumber, order);
         writeOrders(fileName);
-        orders.clear();
         return newOrder;
     }
 
@@ -33,28 +29,24 @@ public class FlooringOrderDaoImpl implements FlooringOrderDao{
         loadOrders(fileName);
         Order newOrder = orders.put(orderNumber, order);
         writeOrders(fileName);
-        orders.clear();
         return newOrder;
     }
 
     public Order getOrder (String fileName, int orderNum) throws FileNotFoundException {
         loadOrders(fileName);
         Order orderToGet = orders.get(orderNum);
-        orders.clear();
         return orderToGet;
     }
 
     public List<Order> getOrdersForDate(String fileName) throws FileNotFoundException {
         loadOrders(fileName);
         List<Order> allOrdersForADate = new ArrayList<Order>(orders.values());
-        orders.clear();
         return allOrdersForADate;
     }
 
     public List<Integer> getOrderNumsForDate(String fileName) throws FileNotFoundException {
         loadOrders(fileName);
         List<Integer> orderNums = new ArrayList<Integer>(orders.keySet());
-        orders.clear();
         return orderNums;
     }
 
@@ -72,7 +64,6 @@ public class FlooringOrderDaoImpl implements FlooringOrderDao{
                 allOrderNums.add(orderNum);
             });
         }
-        orders.clear();
         return allOrderNums;
     }
 
@@ -88,7 +79,7 @@ public class FlooringOrderDaoImpl implements FlooringOrderDao{
     public Order editOrder(String fileName, Order updatedOrder) throws IOException {
         loadOrders(fileName);
 
-        Order orderToEdit = orders.get(updatedOrder.getOrderNumber());
+        Order orderToEdit = this.orders.get(Integer.parseInt(updatedOrder.getOrderNumber()));
 
         orderToEdit.setCustomerName(updatedOrder.getCustomerName());
         orderToEdit.setStateAbbreviation(updatedOrder.getStateAbbreviation());
@@ -111,11 +102,6 @@ public class FlooringOrderDaoImpl implements FlooringOrderDao{
         Order orderToRemove = orders.remove(orderNumber);
         writeOrders(fileName);
         return orderToRemove;
-    }
-
-    public void deleteOrderFile(String fileName) throws IOException {
-        Path pathOfFile = Paths.get(this.ORDER_FOLDER + "\\" + fileName);
-        Files.deleteIfExists(pathOfFile);
     }
 
     private void loadOrders(String fileName) throws FileNotFoundException{
